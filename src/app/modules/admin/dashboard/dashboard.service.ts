@@ -1,12 +1,11 @@
+import { environment } from './../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class DashboardService
 {
-    private _data: BehaviorSubject<any> = new BehaviorSubject(null);
-
+    apiurl = `${environment.apiUrl}api/`;
     /**
      * Constructor
      */
@@ -14,32 +13,10 @@ export class DashboardService
     {
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Getter for data
-     */
-    get data$(): Observable<any>
-    {
-        return this._data.asObservable();
+    GetQrCode() {
+        return this._httpClient.get(this.apiurl + 'GetQrCode');
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Get data
-     */
-    getData(): Observable<any>
-    {
-        return this._httpClient.get('api/dashboards/analytics').pipe(
-            tap((response: any) =>
-            {
-                this._data.next(response);
-            }),
-        );
-    }
+
 }

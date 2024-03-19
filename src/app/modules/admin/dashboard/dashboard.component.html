@@ -6,22 +6,26 @@
             <div class="text-2xl font-semibold tracking-tight leading-6">Feedback Pro Dashboard</div>
             <div class="font-medium tracking-tight text-secondary">
                 <mat-form-field
-                    class="w-full sm:w-36"
+                    class="w-full sm:w-50"
                     [subscriptSizing]="'dynamic'">
+                    <mat-label>Qr Code</mat-label>
                     <mat-select>
-                        <mat-option value="option1">Option 1</mat-option>
-                        <mat-option value="option2">Option 2</mat-option>
-                        <mat-option value="option3">Option 3</mat-option>
+                        <mat-option *ngFor="let qrCodeData of QrCodeData" [value]="qrCodeData.id">
+                            {{qrCodeData.registration}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field
-                    class="w-full sm:w-36"
+                    class="w-full sm:w-50"
                     [subscriptSizing]="'dynamic'">
+                    <mat-label>Number Of Days</mat-label>
                     <mat-select>
-                        <mat-option value="option1">Option 1</mat-option>
-                        <mat-option value="option2">Option 2</mat-option>
-                        <mat-option value="option3">Option 3</mat-option>
+                        <mat-option value="7">7 days</mat-option>
+                        <mat-option value="10">10 days</mat-option>
+                        <mat-option value="15">15 days</mat-option>
+                        <mat-option value="60">60 days</mat-option>
+                        <mat-option value="90">Last 60 days</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -46,15 +50,15 @@
                 </div>
                 <div class="mt-8">
                     <div class="-my-3 divide-y">
-                        <ng-container *ngFor="let dataset of data.newVsReturning.series; let i = index">
+                        <ng-container *ngFor="let dataset of chartNewVsReturning.series; let i = index">
                             <div class="grid grid-cols-3 py-3">
                                 <div class="flex items-center">
                                     <div
                                         class="flex-0 w-2 h-2 rounded-full"
                                         [style.backgroundColor]="chartNewVsReturning.colors[i]"></div>
-                                    <div class="ml-3 truncate">{{data.newVsReturning.labels[i]}}</div>
+                                    <div class="ml-3 truncate">{{chartNewVsReturning.labels[i]}}</div>
                                 </div>
-                                <div class="font-medium text-right">{{data.newVsReturning.uniqueVisitors * dataset / 100 | number:'1.0-0'}}</div>
+                                <div class="font-medium text-right">{{uniqueVisitors * dataset / 100 | number:'1.0-0'}}</div>
                                 <div class="text-right text-secondary">{{dataset}}%</div>
                             </div>
                         </ng-container>
@@ -78,15 +82,15 @@
                 </div>
                 <div class="mt-8">
                     <div class="-my-3 divide-y">
-                        <ng-container *ngFor="let dataset of data.newVsReturning.series; let i = index">
+                        <ng-container *ngFor="let dataset of chartNewVsReturning.series; let i = index">
                             <div class="grid grid-cols-3 py-3">
                                 <div class="flex items-center">
                                     <div
                                         class="flex-0 w-2 h-2 rounded-full"
                                         [style.backgroundColor]="chartNewVsReturning.colors[i]"></div>
-                                    <div class="ml-3 truncate">{{data.newVsReturning.labels[i]}}</div>
+                                    <div class="ml-3 truncate">{{chartNewVsReturning.labels[i]}}</div>
                                 </div>
-                                <div class="font-medium text-right">{{data.newVsReturning.uniqueVisitors * dataset / 100 | number:'1.0-0'}}</div>
+                                <div class="font-medium text-right">{{uniqueVisitors * dataset / 100 | number:'1.0-0'}}</div>
                                 <div class="text-right text-secondary">{{dataset}}%</div>
                             </div>
                         </ng-container>
@@ -96,6 +100,74 @@
 
 
 
+        </div>
+
+        <div class="w-full mt-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 w-full min-w-0">
+                <!-- Highly Dissatisfied -->
+                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <ngb-rating [max]="1" rate="1" ></ngb-rating>
+                    </div>
+                    <div class="flex flex-col items-center mt-2">
+                        <div class="text-7xl sm:text-8x2 font-bold tracking-tight leading-none text-blue-500">73</div>
+                        <div class="text-md font-medium text-blue-600 dark:text-blue-500">Highly Dissatisfied</div>
+
+                    </div>
+                </div>
+                <!-- Dissatisfied -->
+                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div class="text-lg font-medium tracking-tight leading-6 truncate">
+                            <ngb-rating [max]="2" rate="2" ></ngb-rating>
+                        </div>
+
+                    </div>
+                    <div class="flex flex-col items-center mt-2">
+                        <div class="text-7xl sm:text-8x2 font-bold tracking-tight leading-none text-red-500">39</div>
+                        <div class="text-md font-medium text-red-600 dark:text-red-500">Dissatisfied</div>
+                    </div>
+                </div>
+                <!-- Average -->
+                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div class="text-lg font-medium tracking-tight leading-6 truncate">
+                            <ngb-rating [max]="3" rate="3"></ngb-rating>
+                        </div>
+
+                    </div>
+                    <div class="flex flex-col items-center mt-2">
+                        <div class="text-7xl sm:text-8x2 font-bold tracking-tight leading-none text-amber-500">95</div>
+                        <div class="text-md font-medium text-amber-600 dark:text-amber-500">Average</div>
+                    </div>
+                </div>
+                <!-- Satisfied -->
+                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div class="text-lg font-medium tracking-tight leading-6 truncate">
+                            <ngb-rating [max]="4" rate="4"></ngb-rating>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center mt-2">
+                        <div class="text-7xl sm:text-8x2 font-bold tracking-tight leading-none text-green-500">147</div>
+                        <div class="text-md font-medium text-green-600 dark:text-green-500">Satisfied</div>
+                    </div>
+                </div>
+
+                 <!-- Highly Satisfied -->
+                 <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div class="text-lg font-medium tracking-tight leading-6 truncate">
+                            <ngb-rating [max]="5" rate="5"></ngb-rating>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center mt-2">
+                        <div class="text-7xl sm:text-8x2 font-bold tracking-tight leading-none text-green-500">166</div>
+                        <div class="text-md font-medium text-green-600 dark:text-green-500">Highly Satisfied</div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <div class="w-full mt-12">

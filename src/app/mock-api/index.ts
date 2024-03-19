@@ -15,7 +15,7 @@ import { NotificationsMockApi } from 'app/mock-api/common/notifications/api';
 import { SearchMockApi } from 'app/mock-api/common/search/api';
 import { ShortcutsMockApi } from 'app/mock-api/common/shortcuts/api';
 import { UserMockApi } from 'app/mock-api/common/user/api';
-import { AnalyticsMockApi } from 'app/mock-api/dashboards/analytics/api';
+
 
 import { ActivitiesMockApi } from 'app/mock-api/pages/activities/api';
 import { IconsMockApi } from 'app/mock-api/ui/icons/api';
@@ -23,14 +23,11 @@ import { IconsMockApi } from 'app/mock-api/ui/icons/api';
 export const mockApiServices = [
     AcademyMockApi,
     ActivitiesMockApi,
-    AnalyticsMockApi,
     AuthMockApi,
     ChatMockApi,
     ContactsMockApi,
-
     ECommerceInventoryMockApi,
     FileManagerMockApi,
-
     HelpCenterMockApi,
     IconsMockApi,
     MailboxMockApi,
@@ -38,7 +35,6 @@ export const mockApiServices = [
     NavigationMockApi,
     NotesMockApi,
     NotificationsMockApi,
-
     SearchMockApi,
     ScrumboardMockApi,
     ShortcutsMockApi,
